@@ -1,0 +1,64 @@
+#include <iostream>
+using namespace std;
+
+void swap(char* a, char* b) 
+{ 
+    int t = *a; 
+    *a = *b; 
+    *b = t; 
+} 
+   
+int partition (char arr[], int low, int high) 
+{ 
+    int pivot = arr[high];    // pivot 
+    int i = (low - 1);   
+   
+    for (int j = low; j <= high- 1; j++) 
+    {         
+        if (arr[j] <= pivot) 
+        { 
+            i++;    
+            swap(&arr[i], &arr[j]); 
+        } 
+    } 
+    swap(&arr[i + 1], &arr[high]); 
+    return (i + 1); 
+} 
+   
+void quickSort(char arr[], int low, int high) 
+{ 
+    if (low < high) 
+    { 
+        int pivot = partition(arr, low, high); 
+   
+        quickSort(arr, low, pivot - 1); 
+        quickSort(arr, pivot + 1, high); 
+    } 
+} 
+   
+void displayArray(char arr[], int size) 
+{ 
+    int i; 
+    for (i=0; i < size; i++) 
+        cout<<arr[i]<<"\t"; 
+      
+} 
+   
+int main() 
+{ 
+    char arr[] = {'A','n','t','o','n','i','o','A','p','c','e','v','s','k','i','I','N','K','I','7','2','4'}; 
+    int n = sizeof(arr)/sizeof(arr[0]); 
+    cout<<"Nizata pred sortiranje e:"<<endl;
+    displayArray(arr,n);
+    cout<<endl;
+    quickSort(arr, 0, n-1); 
+    cout<<"Nizata posle sortiranje e:"<<endl; 
+    displayArray(arr,n); 
+    return 0; 
+}
+
+/*Quick sort претставува еден вид "раздели па владеј" алгоритам за брзо сортирање, односно се избира еден "pivot" елемент, а останатите елементи се делат во две поднизи
+според тоа дали се поголеми или помали од него, потоа поднизите се сортираат рекурзивно. 
+Во овој код имаме метода swap која што служи за да се заменат местата на два елементи, метода parititon која служи да ја подели низата на партиции, метода quickSort во која 
+се повикуваат и двете методи и таа всушност го прави сортирањето. Методата displatArray служи за да ја прикаже низата во конзолата и main методата е главната метода во која 
+се повикуваат сите методи.*/

@@ -1,0 +1,60 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+
+using namespace std;
+
+const int DECK_SIZE = 54;
+const int SUIT_SIZE = 13;
+
+string jokers[2] = {"Coloured Joker", "Black and White Joker"};
+string suits[4] = {"Hearts", "Diamonds", "Clubs", "Spades"};
+string ranks[SUIT_SIZE] = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+
+void shuffleDeck(string deck[], int size) {
+    for (int i = 0; i < size; i++) {
+        int j = rand() % size;
+        string temp = deck[i];
+        deck[i] = deck[j];
+        deck[j] = temp;
+    }
+}
+
+int main() {
+    string deck[DECK_SIZE];
+    int index = 0;
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < SUIT_SIZE; j++) {
+            deck[index] = ranks[j] + " of " + suits[i];
+            index++;
+        }
+    }
+    
+    // adding two jokers
+    deck[52] = jokers[0];
+    deck[53] = jokers[1];
+    
+    // print deck not shuffled
+    cout << "Шпилот карти пред мешање:\n" << endl;
+    for (int i = 0; i < DECK_SIZE; i++) {
+        cout << deck[i] << endl;
+    }
+    
+    srand(time(NULL)); // seed random number generator
+    
+    shuffleDeck(deck, DECK_SIZE);
+    
+    // print shuffled deck
+    cout << "\n\nШпилот карти после мешање:\n" << endl;
+    for (int i = 0; i < DECK_SIZE; i++) {
+        cout << deck[i] << endl;
+    }
+return 0;
+}
+
+/*Најпрво иницијализираме две константи (една за бројот на карти во шпилот, а другата за бројот на карти во ист "suit"), следно креираме три низи од стрингови (една за двата џокери,
+друга за знаците - suits и третата за броевите - ranks), потоа имаме метода shuffleDeck што на влез прима низа од стрингови која го означува шпилот на карти и другиот влезен аргумент е
+за големината на шпилот, оваа метода служи за да го промеша редоследот на стринговите во низата deck, на крај ја имаме main методата која е главна метога, во неа се повикувваат сите методи,
+односно се декларира deck, се полни со карти, се испишува на конзола шпилот на карти кој не е промешан, потоа се меша шпилот со карти и се печати промешан. Секој пат кога ќе се стартова
+апликацијата во конзола ќе се испишува различно промешан шпил од карти.*/

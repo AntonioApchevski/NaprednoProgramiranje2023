@@ -1,0 +1,108 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+enum Month { Jan = 1, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec };
+
+int main() {
+   // Print all months
+    cout << "All Months: ";
+    for (int i = Jan; i <= Dec; i++) {
+        switch(static_cast<Month>(i)) {
+            case Jan:
+                cout << "Jan ";
+                break;
+            case Feb:
+                cout << "Feb ";
+                break;
+            case Mar:
+                cout << "Mar ";
+                break;
+            case Apr:
+                cout << "Apr ";
+                break;
+            case May:
+                cout << "May ";
+                break;
+            case Jun:
+                cout << "Jun ";
+                break;
+            case Jul:
+                cout << "Jul ";
+                break;
+            case Aug:
+                cout << "Aug ";
+                break;
+            case Sep:
+                cout << "Sep ";
+                break;
+            case Oct:
+                cout << "Oct ";
+                break;
+            case Nov:
+                cout << "Nov ";
+                break;
+            case Dec:
+                cout << "Dec ";
+                break;
+        }
+    }
+    cout << endl;
+
+    // Ask for a month
+    string inputMonth;
+    cout << "Enter a month: ";
+    cin >> inputMonth;
+
+    // Find the month and print the season and consecutive month
+    string months[] = {"", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+    int index = -1;
+    for (int i = Jan; i <= Dec; i++) {
+        if (inputMonth == months[i]) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1) {
+        cout << "Invalid month entered" << endl;
+    } else {
+        int season;
+        if (index < Mar || index == Dec) {
+            season = 0; // Winter
+        } else if (index < Jun) {
+            season = 1; // Spring
+        } else if (index < Sep) {
+            season = 2; // Summer
+        } else {
+            season = 3; // Fall
+        }
+
+        cout << inputMonth << " is in ";
+        switch (season) {
+            case 0:
+                cout << "Winter";
+                break;
+            case 1:
+                cout << "Spring";
+                break;
+            case 2:
+                cout << "Summer";
+                break;
+            case 3:
+                cout << "Fall";
+                break;
+        }
+
+        cout << " and is month " << index << " in the year" << endl;
+    }
+
+    return 0;
+}
+
+/* Најпрво креираме enum кој го нареков Month и во него ги имаме имињата на сите месеци со вредности, почнувајќи од Јануари со вредност 1. Следно во main методата со помош на  for циклус итерираме низ
+вредностите на месеците, каде што со помош на switch case и static_cast<Month>(i), за добиената вредност на i-тиот месец го враќаме името. Потоа со cin внесуваме име на месец. Потоа правиме string од сите 
+месеци, со мала фискултура бидејќи една вредност е празен string, со цел да добиеме точен резултат, иницијализираме поле index со вредност -1, со едноставен for итерираме низ низата и го споредуваме 
+внесенито месец со сите останати, во случај да се исти тогаш index ја добива вредноста i-тиот месец од низата, потоа да се заштитиме од погрешно внесена вредност за месец споредуваме дали index е еднаков
+на -1, испишуваме invalid month entered, ако е тоа случајот, ако не е со if else откриваме во која сезона се наоѓа месецот и променливата season ја добива таа вредност следно со помош на switch case во 
+однос на вредноста која ја доби season испишуваме во кое годишно време е месецот и на крај со едноставен cout испишуваме кој месец по ред е внесенито месец според вредноста на index.*/
